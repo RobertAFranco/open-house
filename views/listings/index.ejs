@@ -1,0 +1,22 @@
+<!-- views/listings/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Listings</title>
+</head>
+<body>
+  <h1>Here's all the Listings</h1>
+  <% if (listings.length > 0) { %>
+    <ul>
+      <% listings.forEach(listing => { %>
+        <li><%= listing.name %> - <%= listing.price %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No listings available.</p>
+  <% } %>
+</body>
+</html>
