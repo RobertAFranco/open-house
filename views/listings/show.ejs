@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= listing.streetAddress %></title>
+    <!-- Add any additional CSS or meta tags here -->
+</head>
+
+<body>
+    <!-- Include the navbar partial -->
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>A listing in <%= listing.city %></h1>
+
+    <h2>Details</h2>
+    <p>House Size: <%= listing.size %> sq ft</p>
+    <p>Price: $<%= listing.price %></p>
+    <p>Street Address: <%= listing.streetAddress %></p>
+
+    <h2>Owner</h2>
+    <% if (user && listing.owner) { %>
+        <% if (listing.owner._id.toString() === user._id.toString()) { %>
+            <p>You own this!</p>
+
+            <!-- Form for deleting the listing -->
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                <!-- Include CSRF token for security -->
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit">Delete this listing</button>
+            </form>
+        <% } else { %>
+            <p>You don't own this, <%= listing.owner.username %> does!</p>
+        <% } %>
+    <% } else { %>
+        <p>Owner information is not available.</p>
+    <% } %>
+
+    <h2>Favorites</h2>
+    <p>Favorited by <%= listing.favoritedByUsers.length %> people.</p>
+
+    <% if (user) { %>
+        <% if (userHasFavorited) { %>
+            <p>You have favorited this listing!</p>
+
+            <!-- Form to unfavorite the listing -->
+            <form action="/listings/<%= listing._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST">
+                <button type="submit">Unfavorite it</button>
+            </form>
+        <% } else { %>
+            <p>You haven't favorited this listing.</p>
+
+            <!-- Form to favorite the listing -->
+            <form action="/listings/<%= listing._id %>/favorited-by/<%= user._id %>" method="POST">
+                <button type="submit">Favorite it!</button>
+            </form>
+        <% } %>
+    <% } %>
+
+    <!-- Add any additional JavaScript or footer content here -->
+</body>
+
+</html>
+

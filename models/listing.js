@@ -22,11 +22,17 @@ const listingSchema = new mongoose.Schema({
     min: 0,
   },
   owner: {
-   type: mongoose.Schema.Types.ObjectId,
-   ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
+  favoritedByUsers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
 });
-// models/listing.js
+
 
 // ... listingSchema located above
 const Listing = mongoose.model('Listing', listingSchema);

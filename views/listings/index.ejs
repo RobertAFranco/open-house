@@ -1,5 +1,3 @@
-<!-- views/listings/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +6,22 @@
   <title>All Listings</title>
 </head>
 <body>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <!-- Include the navbar partial -->
+  <%-include('../partials/_navbar.ejs') %>
+
   <h1>Here's all the Listings</h1>
+  <!-- Add a link to the new listing form -->
+  <a href="/listings/new">Add a New Listing</a>
+  
+  <!-- Existing code for listing display -->
   <% if (listings.length > 0) { %>
     <ul>
       <% listings.forEach(listing => { %>
-        <li><%= listing.name %> - <%= listing.price %></li>
+        <li>
+          A listing in <%= listing.city %> owned by <%= listing.owner ? listing.owner.username : 'Unknown' %>.
+          <a href="/listings/<%= listing._id %>">View more details.</a>
+        </li>
       <% }) %>
     </ul>
   <% } else { %>
@@ -20,3 +29,5 @@
   <% } %>
 </body>
 </html>
+
+
