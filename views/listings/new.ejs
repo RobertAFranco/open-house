@@ -8,7 +8,7 @@
   <title>Add a New Listing</title>
 </head>
 <body>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+   
   <!-- Include the navbar partial -->
   <%-include('../partials/_navbar.ejs') %>
 
@@ -28,6 +28,7 @@
     <input type="number" name="size" id="size" min="0" required />
     
     <button type="submit">Add Listing</button>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
   </form>
 </body>
 </html>

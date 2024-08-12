@@ -6,7 +6,7 @@
   <title>All Listings</title>
 </head>
 <body>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+   
   <!-- Include the navbar partial -->
   <%-include('../partials/_navbar.ejs') %>
 
@@ -27,6 +27,7 @@
   <% } else { %>
     <p>No listings available.</p>
   <% } %>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 </body>
 </html>
 

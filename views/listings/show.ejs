@@ -10,6 +10,7 @@
 
 <body>
     <!-- Include the navbar partial -->
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <%- include('../partials/_navbar.ejs') %>
 
     <h1>A listing in <%= listing.city %></h1>
@@ -27,7 +28,7 @@
             <!-- Form for deleting the listing -->
             <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
                 <!-- Include CSRF token for security -->
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                
                 <button type="submit">Delete this listing</button>
             </form>
         <% } else { %>
