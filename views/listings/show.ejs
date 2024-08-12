@@ -23,7 +23,7 @@
     <% if (user && listing.owner) { %>
         <% if (listing.owner._id.toString() === user._id.toString()) { %>
             <p>You own this!</p>
-
+            <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
             <!-- Form for deleting the listing -->
             <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
                 <!-- Include CSRF token for security -->
@@ -46,6 +46,7 @@
 
             <!-- Form to unfavorite the listing -->
             <form action="/listings/<%= listing._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit">Unfavorite it</button>
             </form>
         <% } else { %>
@@ -53,6 +54,7 @@
 
             <!-- Form to favorite the listing -->
             <form action="/listings/<%= listing._id %>/favorited-by/<%= user._id %>" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit">Favorite it!</button>
             </form>
         <% } %>
